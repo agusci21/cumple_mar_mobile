@@ -59,5 +59,24 @@ class CardsService extends ChangeNotifier{
     this.pictureFile = null;
     notifyListeners();
   }
+
+  Future<String?>uploadImage()async{
+
+    if(this.pictureFile == null) return null;
+
+    final url = Uri.parse('https://api.cloudinary.com/v1_1/dvdig5du5/image/upload?upload_preset=mwgtista');
+    final imageUploadRequest = http.MultipartRequest('POST', url);
+    final file = await http.MultipartFile.fromPath('file', pictureFile!.path);
+    imageUploadRequest.files.add(file);
+    final streamResponse = await imageUploadRequest.send();
+    final resp = await http.Response.fromStream(streamResponse);
+    if(resp.statusCode != 200 && resp.statusCode != 201) {
+      print('Algo salio mal');
+      return null;
+    }
+    
+    final decodedData = jsonDecode(resp.body);
+    return decodedData['secure_url'];
+  }
  
 }

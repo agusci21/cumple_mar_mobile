@@ -405,13 +405,15 @@ class _SendButtom extends StatelessWidget {
             ),
           ),
         ),
-        onPressed: (){
+        onPressed: ()async{
           if(validationService.createCardKey.currentState!.validate()){
+            final String? imageUrl = await cardsService.uploadImage();
             cardsService.finalName = validationService.name as String;
             cardsService.finalMenssaje = validationService.messaje as String;
-            Cards cards = new Cards(
+            Cards cards = Cards(
              message: cardsService.finalMenssaje,
-             name: cardsService.finalName
+             name: cardsService.finalName,
+             picture: imageUrl
           );
            cardsService.createCard(cards);
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Todo salio bien')));
