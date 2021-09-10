@@ -54,5 +54,10 @@ class CardsService extends ChangeNotifier{
     this.pictureFile = File.fromUri(Uri(path: path));
     notifyListeners();
   }
+
+  void deleteImage(){
+    this.pictureFile = null;
+    notifyListeners();
+  }
  
 }

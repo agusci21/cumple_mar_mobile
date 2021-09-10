@@ -86,25 +86,18 @@ class _DemoCard extends StatelessWidget {
         children: [
 
           GestureDetector(
+            onLongPress: () {
+              cardsService.deleteImage();
+            },
              onTap: ()async{
-              final cardsService = Provider.of<CardsService>(context,listen: false);
               final picker = ImagePicker();
               final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
               // ignore: unnecessary_null_comparison
               if(pickedFile == null){
-
+                return;
               }else{
                 cardsService.cardsImage(pickedFile.path);
-              }
-              
-
-              
-
-            //   //TODO tomar fotos 
-            //   if(pickedFile!.path != null) {
-            //     cardsService.selectedCardsImage(pickedFile.path);
-            //   }
-              
+              }  
             },
             child: (cardsService.pictureFile == null) 
             ? _NoImageWidget()
@@ -147,8 +140,20 @@ class _ImagePickedFile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double sh = MediaQuery.of(context).size.height;
+    double sw = MediaQuery.of(context).size.width;
     final cardsService = Provider.of<CardsService>(context);
-    return Image.file(cardsService.pictureFile as File);
+    return Container(
+      height: sw * 0.45,
+      width: sw * 0.45,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        image: DecorationImage(
+          image: FileImage(cardsService.pictureFile as File),
+          fit: BoxFit.cover
+        )
+      ),
+    );
   }
 }
 
