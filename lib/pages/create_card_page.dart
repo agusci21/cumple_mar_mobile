@@ -91,7 +91,7 @@ class _DemoCard extends StatelessWidget {
               final picker = ImagePicker();
               final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
               // ignore: unnecessary_null_comparison
-              if(pickedFile!.path == null){
+              if(pickedFile == null){
 
               }else{
                 cardsService.cardsImage(pickedFile.path);
