@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:cumple_mar_mobile/models/cards_model.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,10 @@ class CardsService extends ChangeNotifier{
   final List<Cards>cards = [];
   bool isLoading = true;
 
-  late Cards selectedCard;
-
   late String finalName;
   late String finalMenssaje;
+  File? pictureFile;
+
 
   CardsService(){
     this.loadCards();
@@ -49,6 +50,9 @@ class CardsService extends ChangeNotifier{
     print(decodedData);
   }
   
-  
+  void cardsImage(String path){
+    this.pictureFile = File.fromUri(Uri(path: path));
+    notifyListeners();
+  }
  
 }

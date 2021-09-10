@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:cumple_mar_mobile/models/cards_model.dart';
@@ -5,6 +6,7 @@ import 'package:cumple_mar_mobile/services/cards_services.dart';
 import 'package:cumple_mar_mobile/services/validations_service.dart';
 import 'package:cumple_mar_mobile/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class CreateCardPage extends StatelessWidget {
@@ -68,6 +70,7 @@ class _DemoCard extends StatelessWidget {
     final double sh = MediaQuery.of(context).size.height;
     final double sw = MediaQuery.of(context).size.width;
     final validationService = Provider.of<ValidationService>(context);
+    final cardsService = Provider.of<CardsService>(context);
 
     return Container(
       padding: EdgeInsets.all(10),
@@ -83,31 +86,29 @@ class _DemoCard extends StatelessWidget {
         children: [
 
           GestureDetector(
-            onTap: ()async{
-              //TODO tomar fotos 
+             onTap: ()async{
+              final cardsService = Provider.of<CardsService>(context,listen: false);
+              final picker = ImagePicker();
+              final XFile? pickedFile = await picker.pickImage(source: ImageSource.camera);
+              // ignore: unnecessary_null_comparison
+              if(pickedFile!.path == null){
+
+              }else{
+                cardsService.cardsImage(pickedFile.path);
+              }
+              
+
+              
+
+            //   //TODO tomar fotos 
+            //   if(pickedFile!.path != null) {
+            //     cardsService.selectedCardsImage(pickedFile.path);
+            //   }
               
             },
-            child: Container(
-              height: sw * 0.45,
-              width: sw * 0.45,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.pink,
-                    Colors.purple
-                  ]
-                ),
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: Column(
-                children: [
-                  Container(height: sh * 0.03,),
-                  Icon(Icons.camera_alt, color: Colors.white70,size: 50,),
-                  Container(height: sh * 0.02,),
-                  Text('Ingresá tu foto',style: TextStyle(fontSize: 22, color: Colors.white), )
-                ],
-              ),
-            ),
+            child: (cardsService.pictureFile == null) 
+            ? _NoImageWidget()
+            : _ImagePickedFile(),
           ),
 
           Container(height: sw * 0.05,),
@@ -119,6 +120,62 @@ class _DemoCard extends StatelessWidget {
               fontSize: 25
             )
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget getImage (String? picture){
+    if(picture == null){
+      return _NoImageWidget();
+    }
+    return Image.file(
+      File(picture),
+      fit: BoxFit.cover,
+    );
+    // else if(picture.startsWith('http')){
+    //   return FadeInImage(
+    //     placeholder: AssetImage('assets/img/placeholderGif.gif'),
+    //     image: NetworkImage()
+    //   );
+    // }
+  }
+}
+
+class _ImagePickedFile extends StatelessWidget {
+
+
+  @override
+  Widget build(BuildContext context) {
+    final cardsService = Provider.of<CardsService>(context);
+    return Image.file(cardsService.pictureFile as File);
+  }
+}
+
+class _NoImageWidget extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    double sh = MediaQuery.of(context).size.height;
+    double sw = MediaQuery.of(context).size.width;
+    return Container(
+      height: sw * 0.45,
+      width: sw * 0.45,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.pink,
+            Colors.purple
+          ]
+        ),
+        borderRadius: BorderRadius.circular(100),
+      ),
+      child: Column(
+        children: [
+          Container(height: sh * 0.03,),
+          Icon(Icons.camera_alt, color: Colors.white70,size: 50,),
+          Container(height: sh * 0.02,),
+          Text('Ingresá tu foto',style: TextStyle(fontSize: 22, color: Colors.white), )
         ],
       ),
     );
