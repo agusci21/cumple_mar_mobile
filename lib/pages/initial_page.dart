@@ -63,7 +63,7 @@ class _Body extends StatelessWidget {
                   child: Text(texto3, style: textStyle,)
                 ),
 
-                GradientButtom(
+                _GradientButtom(
                   text: 'Siguiente',
                   onPressed: (){
                      Navigator.pushReplacementNamed(context, 'home');
@@ -109,12 +109,12 @@ class BoxWhiteBorder extends StatelessWidget {
   }
 }
 
-class GradientButtom extends StatelessWidget {
+class _GradientButtom extends StatelessWidget {
 
   final String text;
   final onPressed;
 
-  const GradientButtom({
+  const _GradientButtom({
     required this.text,
     required this.onPressed
   }); 
