@@ -419,10 +419,7 @@ class _SendButtom extends StatelessWidget {
            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Todo salio bien')));
         } else{
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hay errores')));
-        }
-         
-          //TODO quitar en navigator
-          //Navigator.pushNamed(context, '/home');
+          }
         },
       ),
     );

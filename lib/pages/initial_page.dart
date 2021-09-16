@@ -48,7 +48,7 @@ LA MARTI VA A RECIBIR LAS CARTAS EL DIA DE SU CUMPLEAÑOS''';
 
                 Text('REGALO MARTI', style: textStyle.copyWith(fontSize: 30)),
 
-                _BoxWhiteBorder(
+                BoxWhiteBorder(
                   width: sw * 0.65,
                   child: Text('BIENVENIDOS AL REGALO DE LA MARTI POR SU CUMPLEAÑOS N 20',
                     textAlign: TextAlign.center,
@@ -56,18 +56,23 @@ LA MARTI VA A RECIBIR LAS CARTAS EL DIA DE SU CUMPLEAÑOS''';
                   ),
                 ),
 
-                _BoxWhiteBorder(
+                BoxWhiteBorder(
                   child: Text(
                     texto2,
                     style: textStyle,
                   )
                 ),
 
-                _BoxWhiteBorder(
+                BoxWhiteBorder(
                   child: Text(texto3, style: textStyle,)
                 ),
 
-                _GradientButtom()
+                GradientButtom(
+                  text: 'Siguiente',
+                  onPressed: (){
+                     Navigator.pushNamed(context, 'preCreate');
+                  },
+                )
 
               ],
             ),
@@ -78,13 +83,13 @@ LA MARTI VA A RECIBIR LAS CARTAS EL DIA DE SU CUMPLEAÑOS''';
   }
 }
 
-class _BoxWhiteBorder extends StatelessWidget {
+class BoxWhiteBorder extends StatelessWidget {
 
   final Widget child;
   final double? width;
   final double? height;
 
-  const _BoxWhiteBorder({
+  const BoxWhiteBorder({
     this.width,
     this.height,
     required this.child
@@ -108,12 +113,20 @@ class _BoxWhiteBorder extends StatelessWidget {
   }
 }
 
-class _GradientButtom extends StatelessWidget {
+class GradientButtom extends StatelessWidget {
+
+  final String text;
+  final onPressed;
+
+  const GradientButtom({
+    required this.text,
+    required this.onPressed
+  }); 
 
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-      onPressed: (){},
+      onPressed: onPressed,
       child: Container(
             padding: EdgeInsets.symmetric(horizontal: 50),
             margin: EdgeInsets.only(top: 10, bottom: 5),
@@ -129,7 +142,7 @@ class _GradientButtom extends StatelessWidget {
               )
             ),
             child: Text(
-              'Siguiente',
+              text,
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 55,
