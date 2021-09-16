@@ -16,7 +16,6 @@ class _Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double sh = MediaQuery.of(context).size.height;
     final double sw = MediaQuery.of(context).size.width;
     final String texto2 = '''EL PROPOSITO DE ESTE MENSAJE ES HACERTE SABER DE FORMA BREVE DE QUE SE TRATA TODO ESTO.
       BASICAMENTE, ESTO SE TRATA DE UNA PAGINA WEB EN LA CUAL VAN A APARECER LAS CARTAS DE QUIENES QUIERAN ESCRIBIRLE A LA MARTI POR SU CUMPLEAÑOS.''';
@@ -30,9 +29,6 @@ class _Body extends StatelessWidget {
 •	LA IDEA ES QUE SEAN CARTAS, DENTRO DE LO POSIBLE, EXTENSAS Y SIGNIFICATIVAS PARA LA MARTI
 
 •	LAS CARTAS SOLO VAN A PODER SER LEIDAS POR LA MARTI''';
-    final String texto4 = '''MUCHISIMAS GRACIAS POR TOMARTE EL TIEMPO PARA PONER TU PARTE EN ESTE REGALO
-
-LA MARTI VA A RECIBIR LAS CARTAS EL DIA DE SU CUMPLEAÑOS''';
     final TextStyle textStyle = TextStyle(
       color: Colors.white,
       fontSize: 14

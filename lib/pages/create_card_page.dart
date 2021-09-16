@@ -29,8 +29,6 @@ class _Body extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final validationService = Provider.of<ValidationService>(context);
-    final double sh = MediaQuery.of(context).size.height;
-    final double sw = MediaQuery.of(context).size.width;
 
     return Form(
       key: validationService.createCardKey,
@@ -140,7 +138,6 @@ class _ImagePickedFile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double sh = MediaQuery.of(context).size.height;
     double sw = MediaQuery.of(context).size.width;
     final cardsService = Provider.of<CardsService>(context);
     return Container(
@@ -305,17 +302,6 @@ class _EditableText extends StatelessWidget {
             return '  Deja un mensaje mas largo';
         }
       )
-    );
-  }
-}
-
-class Buttoms extends StatelessWidget {
-  const Buttoms({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      //TODO: implementar botones
     );
   }
 }
