@@ -402,7 +402,7 @@ class _SendButtom extends StatelessWidget {
              picture: imageUrl
           );
            cardsService.createCard(cards);
-           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Todo salio bien')));
+           Navigator.pushReplacementNamed(context, 'preCreate');
         } else{
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Hay errores')));
           }

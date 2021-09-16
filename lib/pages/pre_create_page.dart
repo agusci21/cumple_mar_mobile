@@ -37,12 +37,6 @@ LA MARTI VA A RECIBIR LAS CARTAS EL DIA DE SU CUMPLEAÑOS''';
                 child: Text(texto,style: textStyle,),
               ),
               Spacer(),
-              GradientButtom(
-                onPressed: (){
-                  Navigator.pushReplacementNamed(context, 'home');
-                },
-                text: 'Crear la Carta',
-              )
             ],
           ),
         )

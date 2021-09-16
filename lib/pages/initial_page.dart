@@ -66,7 +66,7 @@ class _Body extends StatelessWidget {
                 GradientButtom(
                   text: 'Siguiente',
                   onPressed: (){
-                     Navigator.pushNamed(context, 'preCreate');
+                     Navigator.pushReplacementNamed(context, 'home');
                   },
                 )
 
