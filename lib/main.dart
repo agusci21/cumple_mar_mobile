@@ -1,4 +1,5 @@
 import 'package:cumple_mar_mobile/pages/create_card_page.dart';
+import 'package:cumple_mar_mobile/pages/initial_page.dart';
 import 'package:cumple_mar_mobile/services/cards_services.dart';
 import 'package:cumple_mar_mobile/services/validations_service.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: 'home',
+      initialRoute: 'initial',
       routes: {
-        'home' : (_) => CreateCardPage()
+        'initial': (_) => InitialPage(),
+        'home'   : (_) => CreateCardPage(),
       },
     );
   }
