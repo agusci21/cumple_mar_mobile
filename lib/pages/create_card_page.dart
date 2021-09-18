@@ -330,6 +330,7 @@ class _NameInput extends StatelessWidget {
 class _SendButtom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool isLoading = false;
     final cardsService = Provider.of<CardsService>(context);
     final validationService = Provider.of<ValidationService>(context);
     return ClipRRect(
@@ -350,22 +351,27 @@ class _SendButtom extends StatelessWidget {
                 color: Colors.white, fontSize: 55, fontFamily: 'Allison'),
           ),
         ),
-        onPressed: () async {
-          if (validationService.createCardKey.currentState!.validate()) {
-            final String? imageUrl = await cardsService.uploadImage();
-            cardsService.finalName = validationService.name as String;
-            cardsService.finalMenssaje = validationService.messaje as String;
-            Cards cards = Cards(
-                message: cardsService.finalMenssaje,
-                name: cardsService.finalName,
-                picture: imageUrl);
-            cardsService.createCard(cards);
-            Navigator.pushReplacementNamed(context, 'preCreate');
-          } else {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text('Hay errores')));
-          }
-        },
+        onPressed: isLoading
+            ? () {}
+            : () async {
+                isLoading = true;
+                if (validationService.createCardKey.currentState!.validate()) {
+                  final String? imageUrl = await cardsService.uploadImage();
+                  cardsService.finalName = validationService.name as String;
+                  cardsService.finalMenssaje =
+                      validationService.messaje as String;
+                  Cards cards = Cards(
+                      message: cardsService.finalMenssaje,
+                      name: cardsService.finalName,
+                      picture: imageUrl);
+                  cardsService.createCard(cards);
+                  Navigator.pushReplacementNamed(context, 'preCreate');
+                } else {
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text('Hay errores')));
+                }
+                isLoading = false;
+              },
       ),
     );
   }
